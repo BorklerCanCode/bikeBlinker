@@ -153,7 +153,6 @@ void pointLeft() {
   }
 }
 void loop() {
-  unsigned long currentMillis = millis();
 
   //ktb need IF AND then (then two else?)
 
