@@ -1,5 +1,13 @@
 ////blinker
 
+//extra includes for future version 200 with wifi remote
+#include <ESPWiFi.h>
+#include <ESPHTTPClient.h>
+#include <JsonListener.h>
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h>
+#include <ESP8266WebServer.h>
+
 //// microcontroller layout
 //p2 main led
 //...
@@ -16,8 +24,9 @@ bool SIG3state = false;
 bool SIG4state = false;
 bool SIG5state = false;
 
-int SIG1btn = 4; // momentary switch, other side connected to ground
-int SIG3btn = 5; // momentary switch, other side connected to ground
+//ideally a I/0/II switch for a bicyle application, momentary switch would require holdover code and a cancel gesture, still
+int SIG1btn = 4; // toggle switch, other side connected to ground
+int SIG3btn = 5; // toggle switch, other side connected to ground
 int SIG1read = 0;
 int SIG3read = 0;
 
@@ -30,14 +39,14 @@ int buttonDelay = 125; //for debounce effect 1/10th of a second for most Real Ti
 void pointLeft();
 void pointRight();
 
+
 void setup() {
   //boot splash
   Serial.begin(115200);
-  Serial.print("Hello world, I'm alan turNing.  JK, this is a G2G user license, please donate any amount to https://www.bikesafeim.org/donatesponsor/make-a-donation/ and reference BorklerCanCode-bikeBlinker1 (copyright J4CodeCo 2023");
+  Serial.print("Hello world, I'm alan turNing.  JK, this is a G2G (Give to Get) user license, please donate any amount to https://www.bikesafeim.org/donatesponsor/make-a-donation/ and reference BorklerCanCode-bikeBlinker1 (copyright J4CodeCo 2023)");
   delay(1250);
 
   pinMode(SIG1btn, INPUT_PULLUP);
-
   pinMode(SIG3btn, INPUT_PULLUP);
 
   pinMode(SIG1led, OUTPUT);
@@ -47,26 +56,104 @@ void setup() {
 }
 
 void pointRight() {
-    SIG1state = true;
+  if (SIG1state == true) {
+    SIG0state = false;
+    SIG1state = false;
     SIG2state = true;
-    SIG3state = !SIG3state;
-    digitalWrite(SIG1led, SIG1state);  // indicate via LED  
-    digitalWrite(SIG2led, SIG2state);  // indicate via LED  
-    digitalWrite(SIG3led, SIG3state);  // indicate via LED
-    delay(buttonDelay/3*2);                     // delay to debounce switch
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/3*2);                     
+  }
+
+  if (SIG2state == true) {
+    SIG0state = false;
+    SIG1state = false;
+    SIG2state = false;
+    SIG3state = true;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay);                     
+    delay(buttonDelay/2);                     
+  }
+
+  if (SIG3state == true) {
+    SIG0state = true;
+    SIG1state = false;
+    SIG2state = false;
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay);                     
+    delay(buttonDelay);                     
+    delay(buttonDelay);                     
+  }
+
+  if (SIG0state == true) {
+    SIG0state = false;
+    SIG1state = true;
+    SIG2state = false;
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/3*2);                     
+  }
 }
 
 void pointLeft() {
-    SIG1state = !SIG1state;
-    SIG2state = true;
-    SIG3state = true;
-    digitalWrite(SIG1led, SIG1state);  // indicate via LED  
-    digitalWrite(SIG2led, SIG2state);  // indicate via LED  
-    digitalWrite(SIG3led, SIG3state);  // indicate via LED
-    delay(buttonDelay/3*2);                     // delay to debounce switch
-}
+  if (SIG1state == true) {
+    SIG0state = true;
+    SIG1state = false;
+    SIG2state = false;
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/3*2);                     
+    delay(buttonDelay);                     
+    delay(buttonDelay);                     
+  }
 
+  if (SIG2state == true) {
+    SIG0state = false;
+    SIG1state = true;
+    SIG2state = false;
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay);                     
+    delay(buttonDelay/2);                     
+  }
+
+  if (SIG3state == true) {
+    SIG0state = false;
+    SIG1state = false;
+    SIG2state = true;
+    SIG3state = false;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay);                     
+  }
+
+  if (SIG0state == true) {
+    SIG0state = false;
+    SIG1state = false;
+    SIG2state = false;
+    SIG3state = true;
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/3*2);                     
+  }
+}
 void loop() {
+  unsigned long currentMillis = millis();
 
   //ktb need IF AND then (then two else?)
 
@@ -85,22 +172,22 @@ void loop() {
   SIG1read = digitalRead(SIG1btn);
   SIG3read = digitalRead(SIG3btn);
 
+  // if no switches are pressed
   if (SIG1read == HIGH && SIG3read == HIGH ) {
-    // switch is pressed - pullup keeps pin high normally
     SIG1state = false;
     SIG2state = true;
     SIG3state = false;
-    digitalWrite(SIG1led, SIG1state);  // indicate via LED  
-    digitalWrite(SIG2led, SIG2state);  // indicate via LED  
-    digitalWrite(SIG3led, SIG3state);  // indicate via LED
-    delay(buttonDelay/2*3);                     // delay to debounce switch
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/2*3);                     
     SIG1state = true;
     SIG2state = false;
     SIG3state = true;
-    digitalWrite(SIG1led, SIG1state);  // indicate via LED  
-    digitalWrite(SIG2led, SIG2state);  // indicate via LED  
-    digitalWrite(SIG3led, SIG3state);  // indicate via LED
-    delay(buttonDelay/2*3);                     // delay to debounce switch
+    digitalWrite(SIG1led, SIG1state);    
+    digitalWrite(SIG2led, SIG2state);    
+    digitalWrite(SIG3led, SIG3state);  
+    delay(buttonDelay/2*3);                     
   }
 
 }
