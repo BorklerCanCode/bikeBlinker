@@ -154,8 +154,6 @@ void pointLeft() {
 }
 void loop() {
 
-  //ktb need IF AND then (then two else?)
-
   SIG1read = digitalRead(SIG1btn);
   if (SIG1read == LOW) {
     // switch is pressed - pullup keeps pin high normally
