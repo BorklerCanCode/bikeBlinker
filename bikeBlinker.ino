@@ -8,13 +8,13 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-//// microcontroller layout
+//// microcontroller layout for the wemos dq r2 esp8266
+//p1 left led
 //p2 main led
+//p3 left led
 //...
 //p4 left btn
 //p5 right btn
-//p1 left led
-//p3 right led
 
 bool SIG0state = false;
 bool SIG1state = false;
