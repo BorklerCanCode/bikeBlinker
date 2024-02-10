@@ -1,0 +1,15 @@
+////This version of the Life-Blinker is hardware+software
+//Building on two pairs of lifeBlinkerGyro, two opponents punch eachothers lights out, from a distance!
+
+////How it works:
+//Keep those dukes up!  If you lower one hand, the opponents punch will do double damage.
+//If you lower both hands, the opponnents punch does even more damage.
+//If you trade blows at the same time, the harder hitter will deal more damage to the slower one
+//based off the difference between the higher and lower speed (like parrying).
+//Juke your opponents with fake hits they want to parry and strike them with their guard down!
+
+////Code in progress, pending results of gyro hardware test
+//ic2 based gryo vs
+//analog gyro
+//eta Q1-Q2 2024, file a bug report against this .ino if you want to see it sooner!
+//I will otherwise prioritize other features based on various constraints. -JB
