@@ -1,6 +1,6 @@
 ////This code is deployed on life blinker classic with or without local 3-position switch
 //if present, set switch to coast.  (other modes may evolve using switch, or no).
-//remove is programmed per LifeBlinkerHomeRemote.ino
+//remote is programmed per LifeBlinkerHomeRemote.ino
 //If you need more than one on the home network, remotes can be n:1 to LED box
 //and LED boxes can be many per home with a change of the target ip in LifeBlinkerHomeRemote.ino
 
