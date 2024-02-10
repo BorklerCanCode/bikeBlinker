@@ -1,4 +1,13 @@
-////blinker
+////This is the bike-blinker-original Dec 2023 version
+//as simple as it gets, with many optimizations and streamlines
+//this base-variant uses a directly attached three-position switch
+//to signal left, right, and coast.
+//All other versions of the Life-Blinker build directly on this,
+//replacing the code in this file for the new effect
+
+////NOTE: elder-care, in-home nurse light, and hearing-impaired doorbell
+//use LifeBlinkerHome.ino for the LEDs, and LifeBlinkerHomeRemote.ino together
+//(not this code)
 
 //extra includes for future version 200 with wifi remote
 #include <ESPWiFi.h>
