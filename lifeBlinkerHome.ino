@@ -4,6 +4,15 @@
 //If you need more than one on the home network, remotes can be n:1 to LED box
 //and LED boxes can be many per home with a change of the target ip in LifeBlinkerHomeRemote.ino
 
+////The globals delay1, delay2, delay3 can be adjusted for longer or shorter time-to-live.
+//doorbell version is ideally about 120, 180, 240 respectively
+//whereas for in-home care, about 10x the above.
+//There is a drain-effect in the code that self-clears the lights
+//while there is a compilation effect that can message a sense of urgency
+//when the button is pressed rapidly, or repeatedly over a time.
+//and of course, you could sub the middle LED for a piezo speaker if desired.
+//Reset button on the LED side could be exposed to cancel after service.
+
 #include <ESPWiFi.h>
 #include <ESPHTTPClient.h>
 #include <JsonListener.h>
@@ -78,6 +87,7 @@ int buttonDelay = 100; //**shorten testing voltage level
 
 //#endif
 
+//Globals that you may want to tweak:
 int delay1=120;
 int delay2=180;
 int delay3=240;
