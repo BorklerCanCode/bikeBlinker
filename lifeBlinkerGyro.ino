@@ -9,12 +9,13 @@
 //I will otherwise prioritize other features based on various constraints. -JB
  
  
-//// Calibration values for D1 ADC
-// think of calibrating Nintendo wii remote or Switch joycon (fun, I know).
-// default values should suffice:
-int ADCmin = 25;  // min is 0,   avg is 11.  Defect is any triple digit number at rest (e.g. 276 or 311)
-int ADCmax = 975; // max is 1023 avg is 987. Defects not yet encountered in approx 10 units.
-// separate calibration not anticipated for 
+////Calibration values for D1 mini ADC may be warranted
+//think of calibrating Nintendo wii remote or Switch joycon (fun, I know)...
+//these default values should suffice:
+int ADCmin = 25;  //min is 1,   avg is 11.  Defect is any triple digit number at rest (e.g. 276 or 311)
+int ADCmax = 975; //max is 1024 avg is 987. Defects not yet encountered in approx 10 units.i
+//REF: 0.727v from D8 is read as approx 237-251 by A0 ADC
+//separate calibration not anticipated for the analog or digital gyros, at present
  
 //// Statistical process control and ongoing reliability testing
 //  Switch this code on to log a report of the arduino board and gryo
