@@ -27,37 +27,42 @@ const char* WIFI_SSID = "YOUR_WIFI_AP_NAME_HERE_PLS";
 const char* WIFI_PWD = "YOUR_WIFI_AP_PASSWORD_HERE_PLS";
 //ATTN: you'll want to set your mac address in your wifi router's preferred DHCP to arrange a planned/predictable IP
 
-//// microcontroller layout (like the life blinker classic)
-//p1 left led
-//p2 main led
-//p3 left led
-//p4 left btn //optional in this build
-//p5 right btn  //optional in this build
+////Wifi sleep mode:
+int radioEnabled = 1;
 
-bool SIG0state = false;
+//// microcontroller layout
+//left  led  TX pin (GPIO  1) 
+//main  led  D4 pin (GPIO  2)
+//right led  RX pin (GPIO  3)
+//left  btn  D5 pin (GPIO 14)
+//right btn  D6 pin (GPIO 12)
+
+int SIG1led = 1;     // LED on pin 1 "TX" on most arduinos
+int SIG2led = 2;     // LED on pin 2 "D4" system LED in most arduinos
+int SIG3led = 3;     // LED on pin 3 "RX" on most arduinos
+
+//ideally a I/0/II switch for a bicyle application, momentary switch would require holdover code and a cancel gesture, still
+//ATTN: For the home remote, only one momentary switch is needed.
+//No switches are needed on the attendant side
+int SIG1btn = 14; // switch, other side connected to ground/common
+int SIG2btn = 2;  // switch, other side connected to ground/common
+int SIG3btn = 12; // switch, other side connected to ground/common
+int SIG1read = 0;
+int SIG2read = 0;
+int SIG3read = 0;
+
+//boolean vars
+bool SIG0state = false; //virtual/place-holder (just like the number zero)
 bool SIG1state = false;
 bool SIG2state = true;
 bool SIG3state = false;
-
-int alertLevel = 0;
-int SELECTb = D6;
-int OKb = D5;
-int CANCELb = D4;
-//duplicates of the same i/o's
-int SIG1btn = D4; // toggle switch, other side connected to ground
-int SIG3btn = D5; // toggle switch, other side connected to ground
-int SIG1read = 0;
-int SIG3read = 0;
-
 bool SIG4state = false;
 bool SIG5state = false;
 
-int SIG1led = D1;     // LED on pin 1
-int SIG2led = D2;     // LED on pin 2
-int SIG3led = D3;     // LED on pin 3
-
-/////////////////blessed ^^^
-
+int alertLevel = 0;
+int SELECTb = D6;
+int OKb = D2;
+int CANCELb = D5;
 
 ESP8266WebServer server(80);
 //String string0 = "...awaiting user input on:";
@@ -355,6 +360,4 @@ void webActions(int setMode, String label) {
   webString = "";
     
 }
-
-
 //endfunc
