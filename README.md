@@ -2,7 +2,7 @@
 
 The Life Blinker began as a bike-blinker safety device made by J. Bourdlaies in response to a massive increase in bicyclists involved in accidents and fatalities worldwide.  Drivers are more distracted than ever, so markers and signals offer an important countermeasure.  Due to the arduino core, it is easy for anyone to build the Life Blinker.  Details, product and DIY videos are available on links below.
 
-bikeBlinker, the Life Blinker classic, is a $11USD DIY build with the single largest as the $2-3USD globally available Arduino D1 Mini dev-board (clones work fine, too).  A directly attached 3-position switch selects left, right, and coast mode.  No switch is required for pedestrians and joggers, who can wear it with the lights in coast mode (as might ice-climbers).
+bikeBlinker, the Life Blinker classic, is a $11USD DIY build with the single largest expense as the $2-3USD globally available Arduino D1 Mini dev-board (clones work fine, too).  A directly attached 3-position switch selects left, right, and coast mode.  No switch is required for pedestrians and joggers, who can wear it with the lights in coast mode (as might ice-climbers).
 
 ---EXPANSIONS VARIANTS AND OPTIONS---
 
