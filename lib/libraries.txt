@@ -1,0 +1,2 @@
+###common dependencies for arduino esp8266 projects 
+###these are not my code, you can find more updated libraries on github
