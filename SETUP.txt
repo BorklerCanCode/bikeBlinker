@@ -1,5 +1,8 @@
 Here are some notes to help with initial setup:
 
+### library files are in the ./lib/ folder of this repo (to save you time)
+Files in ./lib/ are not my code, but mainstream ardunio libraries
+
 ### Board info for the esp8266 boards like the D1 Mini need to be added to the arduino IDE from
 File > preferences 
 at the bottom of the window, you can add a comma and then this url:
