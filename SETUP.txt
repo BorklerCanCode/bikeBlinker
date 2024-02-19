@@ -1,0 +1,13 @@
+Here are some notes to help with initial setup:
+
+### Board info for the esp8266 boards like the D1 Mini need to be added to the arduino IDE from
+File > preferences 
+at the bottom of the window, you can add a comma and then this url:
+https://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+If you need a visual guide, checkout
+yt vid for IDE 2.X (current)
+https://www.youtube.com/watch?v=t4Nu5Qn0QkA
+
+yt vid for IDE 1.X (older)
+https://www.youtube.com/watch?v=OC9wYhv6juM
