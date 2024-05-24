@@ -5,5 +5,5 @@
 //Adding a momentary switch may be desirable for your use case.
 
 ////Code in progress, pending mesh mode debugging.
-//eta Q1-Q2 2024, file a bug report against this .ino if you want to see it sooner!
+//eta Q3-Q4 2024, file a bug report against this .ino if you want to see it sooner!
 //I will otherwise prioritize other features based on various constraints. -JB
